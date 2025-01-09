@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -15,6 +16,7 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
+  bool isLoading = false;
   final LatLng _center = const LatLng(38.737886, 35.475344);
   final String mapUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
   List<Marker> _markerList = [];
@@ -41,44 +43,69 @@ class _MapPageState extends State<MapPage> {
           ),
         ],
       ),
-      body: FlutterMap(
-        mapController: _mapController,
-        options: MapOptions(
-          initialCenter: _center,
-        ),
+      body: Stack(
         children: [
-          TileLayer(
-            urlTemplate: mapUrl,
-            //tileBounds: _bounds,
-          ),
-          MarkerClusterLayerWidget(
-            options: MarkerClusterLayerOptions(
-              rotate: true,
-              maxClusterRadius: 100,
-              size: const Size(40, 40),
-              markers: _markerList,
-              builder: (BuildContext context, List<Marker> markers) {
-                return Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 2),
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                  ),
-                  width: 40,
-                  height: 40,
-                  child: Center(
-                    child: Text(markers.length.toString()),
-                  ),
-                );
-              },
+          FlutterMap(
+            mapController: _mapController,
+            options: MapOptions(
+              initialCenter: _center,
             ),
+            children: [
+              TileLayer(
+                urlTemplate: mapUrl,
+                //tileBounds: _bounds,
+              ),
+              MarkerClusterLayerWidget(
+                options: MarkerClusterLayerOptions(
+                  rotate: true,
+                  maxClusterRadius: 100,
+                  size: const Size(50, 50),
+                  markers: _markerList,
+                  builder: (BuildContext context, List<Marker> markers) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black, width: 2),
+                        shape: BoxShape.circle,
+                        color: Colors.black,
+                      ),
+                      width: 40,
+                      height: 40,
+                      child: Center(
+                        child: Text(markers.length.toString()),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
+          if (isLoading)
+            Stack(
+              children: [
+                BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                  child: Container(
+                    color: Colors.black.withOpacity(0.3), // Arka plan opaklığı
+                  ),
+                ),
+                const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ],
+            ),
         ],
       ),
     );
   }
 
+  void changeLoading() {
+    setState(() {
+      isLoading = !isLoading;
+    });
+  }
+
   Future<void> getMarkers() async {
+    changeLoading();
     Uri? uri = Uri.tryParse(
         "https://firestore.googleapis.com/v1/projects/iot-project-db90a/databases/(default)/documents/gateway_data");
     if (uri != null) {
@@ -99,14 +126,15 @@ class _MapPageState extends State<MapPage> {
         setState(() {
           _markerList = parkingDataList
               .map((parkingData) => Marker(
-                    width: 40.0,
-                    height: 40.0,
+                    width: 50.0,
+                    height: 50.0,
                     point:
                         LatLng(parkingData.latitude!, parkingData.longitude!),
                     child: Icon(
                       Icons.location_on,
+                      size: 50,
                       color:
-                          parkingData.status == 1 ? Colors.green : Colors.red,
+                          parkingData.status == 1 ? Colors.red : Colors.green,
                     ),
                   ))
               .toList();
@@ -115,5 +143,6 @@ class _MapPageState extends State<MapPage> {
         print('Error: ${response.statusCode}');
       }
     }
+    changeLoading();
   }
 }
