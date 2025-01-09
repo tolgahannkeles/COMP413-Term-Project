@@ -42,8 +42,8 @@ data_dict = {
     "id": ID,
     "distance": 0,
     "status": PARK_STATUS["UNKNOWN"],
-    "latitude":38.737177, 
-    "longitude":35.472940
+    "latitude":38.73717, 
+    "longitude":35.47294
 }
 
 def connect_to_wifi():
@@ -73,9 +73,12 @@ def get_park_status():
         distance = get_distance()
         print(distance)
         data_dict["distance"] = distance  # Mesafeyi JSON'a ekle
-        if is_threshold_passed(distance):
+        if distance < 0:
+            return "UNKNOWN"
+        elif is_threshold_passed(distance):
             return "EMPTY"
-        return "FULL"
+        else:
+            "FULL"
     except Exception as e:
         print("Error: ", e)
         return "UNKNOWN"
