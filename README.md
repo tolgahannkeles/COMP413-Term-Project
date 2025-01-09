@@ -1,10 +1,9 @@
+![377591565-9e51dfa4-3b07-4c47-880a-65d11581b355](https://github.com/user-attachments/assets/dde5d0cb-2787-4266-8cd5-2fcdfacbddea)
+
 # COMP413-G5-Smart-Parking-System
 
 ## Project Overview
 The **Smart Parking System** is an IoT-based solution aimed at addressing the inefficiencies in parking management in urban areas. By reducing the time and effort required to locate parking spots, the system minimizes traffic congestion, fuel consumption, and environmental damage. The system uses ultrasonic sensors and ESP32 microcontrollers to detect and relay parking space availability to users in real time via a mobile application and website.
-
-![377591565-9e51dfa4-3b07-4c47-880a-65d11581b355](https://github.com/user-attachments/assets/dde5d0cb-2787-4266-8cd5-2fcdfacbddea)
-
 
 ---
 
