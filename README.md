@@ -1,7 +1,7 @@
 # COMP413-G5-Smart-Parking-System
 
 ## Project Overview
-The **Smart Parking System** is an IoT-based solution aimed at addressing the inefficiencies in parking management in urban areas. By reducing the time and effort required to locate parking spots, the system minimizes traffic congestion, fuel consumption, and environmental damage. The system uses ultrasonic sensors and ESP32 microcontrollers to detect and relay parking space availability to users in real time via a mobile application and web dashboard.
+The **Smart Parking System** is an IoT-based solution aimed at addressing the inefficiencies in parking management in urban areas. By reducing the time and effort required to locate parking spots, the system minimizes traffic congestion, fuel consumption, and environmental damage. The system uses ultrasonic sensors and ESP32 microcontrollers to detect and relay parking space availability to users in real time via a mobile application and website.
 
 ---
 
@@ -61,7 +61,7 @@ In cities, inefficient use of parking spaces contributes significantly to traffi
 ## Results and Discussion
 ### Key Outcomes
 - Real-time parking space monitoring achieved.
-- Mobile application and web dashboard successfully display parking availability.
+- Mobile application and website successfully display parking availability.
 
 ### Challenges
 - Environmental factors affecting sensor accuracy.
@@ -89,8 +89,7 @@ comp413-g5-smart-parking-system/
 ├── README.md           # Overview of the project
 ├── src/                # Source code for ESP32 and Flutter app
 ├── docs/               # Documentation and project report (PDF)
-├── images/             # Images for dashboard and system architecture
-└── demo/               # Video demo (3 mins)
+└── images/             # Images for system architecture
 ```
 
 ---
@@ -116,7 +115,7 @@ comp413-g5-smart-parking-system/
 
 ## Live Demo
 - **Video Demo**: [Link to 3-minute video demo]
-- **Live Dashboard**: [Link to dashboard]
+- **Live Website**: https://iot-project-db90a.web.app/
 
 ---
 
