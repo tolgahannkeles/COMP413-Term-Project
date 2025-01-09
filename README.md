@@ -13,15 +13,15 @@ In cities, inefficient use of parking spaces contributes significantly to traffi
 ## System Architecture
 
 ### **Sensing Layer**
-- **Components**: Ultrasonic sensors (3x HCSR04), ESP32 (2x) and ESP32S Mini (1x).
+- **Components**: Ultrasonic sensors (3x HCSR04), ESP32 (2x) and ESP32-S (1x).
 - **Functionality**: Detects the presence or absence of vehicles based on distance measurements. Sends data to the gateway only when there is a state change (e.g., from `empty` to `full`).
 
 ### **Communication Layer**
-- **Components**: ESP32S Mini (Gateway).
+- **Components**: ESP32-S2 Mini (Gateway).
 - **Functionality**: Receives data from sensor nodes and forwards it to Firebase for storage and real-time updates.
 
 ### **Application Layer**
-- **Components**: Flutter-based mobile application, Firebase backend.
+- **Components**: Flutter-based mobile application and website, Firebase backend.
 - **Functionality**: Retrieves data from Firebase and displays parking space availability on an interactive map.
 
 ---
@@ -30,7 +30,7 @@ In cities, inefficient use of parking spaces contributes significantly to traffi
 ### Components Used
 1. **Ultrasonic Sensors (HCSR04)**:
    - Measures the distance to objects to detect vehicle presence.
-2. **ESP32 and ESP32S Mini**:
+2. **ESP32 and ESP32-S**:
    - Processes sensor data and communicates with the gateway and Firebase.
 3. **Gateway Device (ESP32S Mini)**:
    - Aggregates data from nodes and sends it to Firebase.
@@ -87,7 +87,8 @@ The **Smart Parking System** contributes to the following SDGs:
 ```
 comp413-g5-smart-parking-system/
 ├── README.md           # Overview of the project
-├── src/                # Source code for ESP32 and Flutter app
+├── mobile_app/         # Source code for Flutter app
+├── microcontrollers/   # Source code for gateway and sensor nodes
 ├── docs/               # Documentation and project report (PDF)
 └── images/             # Images for system architecture
 ```
@@ -98,8 +99,8 @@ comp413-g5-smart-parking-system/
 
 ### Hardware Setup
 1. Connect HCSR04 sensors to ESP32 devices.
-2. Configure the ESP32S Mini as the gateway device.
-3. Ensure all devices are connected to the same network.
+2. Configure the ESP32-S2 Mini as the gateway device.
+3. Ensure all devices are connected to the gateway network.
 
 ### Software Setup
 1. Clone this repository.
@@ -114,7 +115,7 @@ comp413-g5-smart-parking-system/
 ---
 
 ## Live Demo
-- **Video Demo**: [Link to 3-minute video demo]
+- **Video Demo**: https://0x0.st/s/3riFpAIwIm9EzLAOGXGpZg/8-B9.webm
 - **Live Website**: https://iot-project-db90a.web.app/
 
 ---
@@ -123,8 +124,3 @@ comp413-g5-smart-parking-system/
 - Muhammet Çağrı Akkuş
 - Tolgahan Keleş
 - Umut Kaya
-
----
-
-## License
-This project is licensed under the MIT License.
