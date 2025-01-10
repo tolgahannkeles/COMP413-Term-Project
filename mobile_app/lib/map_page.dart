@@ -125,18 +125,9 @@ class _MapPageState extends State<MapPage> {
         // Convert ParkingData list to Marker list
         setState(() {
           _markerList = parkingDataList
-              .map((parkingData) => Marker(
-                    width: 50.0,
-                    height: 50.0,
-                    point:
-                        LatLng(parkingData.latitude!, parkingData.longitude!),
-                    child: Icon(
-                      Icons.location_on,
-                      size: 50,
-                      color:
-                          parkingData.status == 1 ? Colors.red : Colors.green,
-                    ),
-                  ))
+              .map(
+                (parkingData) => buildMarker(parkingData),
+              )
               .toList();
         });
       } else {
@@ -144,5 +135,51 @@ class _MapPageState extends State<MapPage> {
       }
     }
     changeLoading();
+  }
+
+  Marker buildMarker(ParkingData data) {
+    Color? color;
+    String? status;
+    switch (data.status) {
+      case 0:
+        color = Colors.green;
+        status = 'Empty';
+        break;
+      case 1:
+        color = Colors.red;
+        status = 'Full';
+        break;
+      case -1:
+        status = 'Unknown';
+        color = Colors.grey;
+    }
+    return Marker(
+      point: LatLng(data.latitude!, data.longitude!),
+      width: 100,
+      height: 100,
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text(
+              status!,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Icon(
+            Icons.location_on,
+            size: 50,
+            color: color,
+          ),
+        ],
+      ),
+    );
   }
 }
