@@ -53,11 +53,8 @@ def connect_to_wifi():
         if not wlan.isconnected():
             print("Wi-Fi'ye bağlanılıyor...")
             wlan.connect(SSID, PASSWORD)
-            led.on()
             while not wlan.isconnected():
-                led.off()
                 pass
-            led.on()
         print("Bağlandı:", wlan.ifconfig())
     except Exception as e:
         print("Wi-Fi bağlantısı yapılamadı:", e)

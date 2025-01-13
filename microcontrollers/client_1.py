@@ -46,6 +46,7 @@ data_dict = {
     "longitude":35.47294
 }
 
+
 def connect_to_wifi():
     try:
         wlan = network.WLAN(network.STA_IF)
@@ -107,7 +108,7 @@ try:
             send_to_server(current_status)
             prev_status = current_status
         # 5 saniye bekle
-        time.sleep(5)
+        time.sleep(2)
 except KeyboardInterrupt:
     print("\nVeri gönderimi durduruldu.")
 finally:
